@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="default">Salvar</button>
+</form>
+<a href="{% url 'admin:cestas_basicas_cadastrocestabasica_changelist' %}">Voltar</a>
+{% endblock %}
