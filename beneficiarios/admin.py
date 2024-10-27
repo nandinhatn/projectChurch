@@ -1,15 +1,21 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Beneficiario
-from django.utils.translation import gettext_lazy as _
+from retiradas_cestas_basicas.models import RetiradaCestaBasica
 
-admin.site.site_header = _("Nome da Sua Igreja - Admin")
-admin.site.site_title = _("Nome da Sua Igreja")
-admin.site.index_title = _("Bem-vindo ao Painel de Administração da Sua Igreja")
+class RetiradaCestaBasicaInline(admin.TabularInline):
+    model = RetiradaCestaBasica
+    extra = 0
+    readonly_fields = ('beneficiario',)
 
-@admin.register(Beneficiario)
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('beneficiario')
+
 class BeneficiarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cpf','endereco', 'qtd_membros_familia', 'data_cadastro', 'data_nascimento')
-    search_fields = ('nome',)
-    list_filter = ('data_cadastro', 'qtd_membros_familia')
+    list_display = ('id', 'nome', 'cpf', 'endereco', 'qtd_membros_familia', 'data_cadastro', 'data_nascimento')
+    inlines = [RetiradaCestaBasicaInline]
+
+    def contagem_retiradas(self, obj):
+        return obj.contagem_retiradas()
+    contagem_retiradas.short_description = 'Número de Retiradas'
+
+admin.site.register(Beneficiario, BeneficiarioAdmin)

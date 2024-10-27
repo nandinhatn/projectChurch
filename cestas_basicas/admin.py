@@ -7,7 +7,7 @@ from .forms import CadastroCestaBasicaForm
 class CadastroCestaBasicaAdmin(admin.ModelAdmin):
     form = CadastroCestaBasicaForm
     list_display = ('id', 'cesta_qtd')
-    
+
     # Impede a edição direta da quantidade de cestas no admin
     def get_readonly_fields(self, request, obj=None):
         return ['cesta_qtd']
@@ -23,14 +23,14 @@ class CadastroCestaBasicaAdmin(admin.ModelAdmin):
 
         if adicionar_cesta:
             obj.cesta_qtd += adicionar_cesta  # Adiciona a quantidade especificada
-            messages.success(request, f'Adicionou {adicionar_cesta} cestas para {obj.id}.')
-
+            messages.success(request, f'Adicionou {adicionar_cesta} cestas. Total: {obj.cesta_qtd}.')
+        
         if remover_cesta:
             if obj.cesta_qtd >= remover_cesta:
                 obj.cesta_qtd -= remover_cesta  # Remove a quantidade especificada
-                messages.success(request, f'Removeu {remover_cesta} cestas de {obj.id}.')
+                messages.success(request, f'Removeu {remover_cesta} cestas. Total: {obj.cesta_qtd}.')
             else:
-                messages.warning(request, f'Não é possível remover {remover_cesta} cestas de {obj.id}, pois a quantidade atual é {obj.cesta_qtd}.')
+                messages.warning(request, f'Não é possível remover {remover_cesta} cestas, pois a quantidade atual é {obj.cesta_qtd}.')
 
         # Salva as alterações
         obj.save()
