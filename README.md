@@ -19,4 +19,5 @@
 <p align="center">
   <strong>Diagrama de Classes </strong>
 </p>
-![diagramadeclasse](https://github.com/user-attachments/assets/a9109fd1-73fa-4d7b-825a-5de53d116bb3)
+
+![diagramadeclasse](https://github.com/user-attachments/assets/f797587e-b749-431b-8db8-3b0303efc4b0)
