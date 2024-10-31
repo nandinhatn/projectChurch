@@ -1,6 +1,6 @@
-<p align="center">
-  <strong>PROJETO EXTENSIONISTA</strong>
-</p>
+
+  # PROJETO EXTENSIONISTA
+
 
 # Requisitos do Sistema de Controle de Cestas Básicas
 
